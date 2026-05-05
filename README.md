@@ -45,7 +45,7 @@ See `docker-compose.yaml` for complete list of configurable options.
 
 ## 📂 Volumes
 
-- `./rootfs/data/dashy` - Data storage
+- `./volumes/data/dashy` - Data storage
 
 ## 🔍 Logging
 
