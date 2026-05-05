@@ -20,7 +20,7 @@ services:
     ports:
       - '172.17.0.1:80:80'
     volumes:
-      - './rootfs/data/dashy:/data'
+      - './volumes/data/dashy:/data'
     networks:
       - dashy
 
