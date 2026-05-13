@@ -20,9 +20,9 @@ services:
       CONTAINER_NAME: dashy-app
       HOSTNAME: ${BASE_HOST_NAME:-$HOSTNAME}
     ports:
-      - '172.17.0.1:80:80'
+      - '172.17.0.1:80:8080'
     volumes:
-      - './volumes/data/dashy:/data'
+      - './volumes/data/dashy:/app/user-data'
     networks:
       - dashy
       - proxy
@@ -31,7 +31,7 @@ services:
       - 'traefik.enable=true'
       - 'cloudflare.enable=true'
       - 'traefik.docker.network=proxy'
-      - 'cloudflare.service=http://dashy-app:80'
+      - 'cloudflare.service=http://dashy-app:8080'
       - 'cloudflare.hostname=dashy.${CLOUDFLARE_ZONE_NAME:-}'
       - 'traefik.http.routers.dashy-app.entrypoints=http'
       - 'traefik.http.routers.dashy-app-secure.tls=true'
@@ -42,7 +42,7 @@ services:
       - 'traefik.http.routers.dashy-app-secure.rule=Host($(${BASE_HOST_NAME:-$HOSTNAME}))'
       - 'traefik.http.routers.dashy-app-secure.tls.certresolver=cloudflare'
       - 'traefik.http.routers.dashy-app-secure.service=dashy-app'
-      - 'traefik.http.services.dashy-app.loadbalancer.server.port=80'
+      - 'traefik.http.services.dashy-app.loadbalancer.server.port=8080'
 
 networks:
   dashy:
